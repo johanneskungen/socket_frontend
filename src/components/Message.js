@@ -44,12 +44,19 @@ function Message({ room }) {
       >
         <h1 className="text-white font-bold text-2xl">Welcome to Chat!</h1>
         <div className="flex gap-3">
-          <input
-            placeholder="name"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-          />
-          <button onClick={sign}>connect</button>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              sign();
+            }}
+          >
+            <input
+              placeholder="name"
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+            <button type="submit">connect</button>
+          </form>
         </div>
       </div>
       <div className="flex items-center justify-between">
@@ -77,7 +84,7 @@ function Message({ room }) {
         <div>
           {messages[0].msg
             ? messages.map((mes) => (
-                <p
+                <div
                   key={Math.random() * 20}
                   className={`p-4 shadow-xl w-64 mt-4 border hover:border-orange-600 cursor-pointer rounded-md duration-75`}
                 >
@@ -86,7 +93,7 @@ function Message({ room }) {
                     <p>{mes.time}</p>
                   </div>
                   <p className="text-lg">{mes.msg}</p>
-                </p>
+                </div>
               ))
             : "No messages to display..."}
         </div>

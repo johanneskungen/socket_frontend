@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 const URL =
   process.env.NODE_ENV === "production"
     ? "https://socket-backend-nw30.onrender.com"
-    : `http://localhost:${process.env.PORT}`;
+    : `http://localhost:1111`;
 
 export const socket = io(URL, {
   autoConnect: true,

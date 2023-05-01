@@ -38,13 +38,14 @@ function Message({ room }) {
   return (
     <div className="m-8">
       <div
-        className={`popup w-screen h-screen bg-black/70 absolute top-0 left-0 flex items-center gap-8 flex-col justify-center ${
+        className={`popup w-screen h-screen z-10 bg-black/70 absolute top-0 left-0 flex items-center gap-8 flex-col justify-center ${
           popup ? "block" : "hidden"
         }`}
       >
         <h1 className="text-white font-bold text-2xl">Welcome to Chat!</h1>
         <div className="flex gap-3">
           <form
+            className="flex gap-1 z-20"
             onSubmit={(e) => {
               e.preventDefault();
               sign();
@@ -55,7 +56,9 @@ function Message({ room }) {
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
             />
-            <button type="submit">connect</button>
+            <button type="submit" className="bg-white py-2 font-semibold">
+              connect
+            </button>
           </form>
         </div>
       </div>
@@ -66,17 +69,19 @@ function Message({ room }) {
               e.preventDefault();
               sendMessage();
             }}
-            className="flex gap-3"
+            className="flex gap-3 absolute bottom-4 left-[50%] translate-x-[-50%]"
           >
             <input
               placeholder="message"
               value={input}
               onChange={(e) => setInput(e.target.value)}
             />
-            <button type="submit">send</button>
+            <button type="submit" className="bg-white border">
+              send
+            </button>
           </form>
         </div>
-        <div>
+        <div className="absolute top-4 right-4">
           <h3>logged in as: {userName}</h3>
         </div>
       </div>
@@ -86,7 +91,9 @@ function Message({ room }) {
             ? messages.map((mes) => (
                 <div
                   key={Math.random() * 20}
-                  className={`p-4 shadow-xl w-64 mt-4 border hover:border-orange-600 cursor-pointer rounded-md duration-75`}
+                  className={`p-4 shadow-xl w-64 mt-4 border hover:border-orange-600 cursor-pointer rounded-md duration-75 ${
+                    mes.name === userName ? "md:mr-12" : "ml-12"
+                  }`}
                 >
                   <div className="text-black/60 font-semibold text-sm flex justify-between">
                     <p>{mes.name === userName ? "@you" : "@" + mes.name}</p>
